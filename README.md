@@ -4,9 +4,9 @@
 
 Set your countdown timer with optional alarm sounds and start, pause, and reset as you wish. The app is written in SwiftUI 2 and it is perfect for everyday activities such as cooking meals, taking quizzes, giving speeches, playing sports, or practicing music.
 
-![](Screenshots/Scene-1.png)
-![](Screenshots/Scene-2.png)
-![](Screenshots/Scene-3.png)
+![](Screenshots/scene-1.png)
+![](Screenshots/scene-2.png)
+![](Screenshots/scene-3.png)
 
 
 # Built With
