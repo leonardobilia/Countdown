@@ -11,6 +11,13 @@
 		8F34262E24E8898100149AB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34262D24E8898100149AB7 /* ContentView.swift */; };
 		8F34263024E8898200149AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F34262F24E8898200149AB7 /* Assets.xcassets */; };
 		8F34263324E8898200149AB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F34263224E8898200149AB7 /* Preview Assets.xcassets */; };
+		8F34263F24E889C300149AB7 /* CountdownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34263E24E889C300149AB7 /* CountdownModel.swift */; };
+		8F34264124E88A2700149AB7 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264024E88A2700149AB7 /* CircularProgressView.swift */; };
+		8F34264324E8970B00149AB7 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264224E8970B00149AB7 /* ClockView.swift */; };
+		8F34264524E8A37200149AB7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264424E8A37200149AB7 /* SettingsView.swift */; };
+		8F34264824E8A75200149AB7 /* Binding+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264724E8A75200149AB7 /* Binding+Ext.swift */; };
+		8F34264A24E95E9800149AB7 /* SystemSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264924E95E9800149AB7 /* SystemSounds.swift */; };
+		8F34264C24E96F2400149AB7 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F34264B24E96F2400149AB7 /* CircleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +27,13 @@
 		8F34262F24E8898200149AB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F34263224E8898200149AB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8F34263424E8898200149AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F34263E24E889C300149AB7 /* CountdownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownModel.swift; sourceTree = "<group>"; };
+		8F34264024E88A2700149AB7 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		8F34264224E8970B00149AB7 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		8F34264424E8A37200149AB7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8F34264724E8A75200149AB7 /* Binding+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Ext.swift"; sourceTree = "<group>"; };
+		8F34264924E95E9800149AB7 /* SystemSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SystemSounds.swift; path = Countdown/SystemSounds.swift; sourceTree = SOURCE_ROOT; };
+		8F34264B24E96F2400149AB7 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +66,11 @@
 		8F34262A24E8898100149AB7 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
-				8F34262B24E8898100149AB7 /* CountdownApp.swift */,
-				8F34262D24E8898100149AB7 /* ContentView.swift */,
+				8F34263B24E8899C00149AB7 /* App */,
+				8F34264624E8A72300149AB7 /* Extensions */,
+				8F34263D24E889A900149AB7 /* Models */,
+				8F34263C24E889A200149AB7 /* Components */,
+				8F34263A24E8898F00149AB7 /* Screens */,
 				8F34262F24E8898200149AB7 /* Assets.xcassets */,
 				8F34263424E8898200149AB7 /* Info.plist */,
 				8F34263124E8898200149AB7 /* Preview Content */,
@@ -67,6 +84,50 @@
 				8F34263224E8898200149AB7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8F34263A24E8898F00149AB7 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8F34262D24E8898100149AB7 /* ContentView.swift */,
+				8F34264424E8A37200149AB7 /* SettingsView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		8F34263B24E8899C00149AB7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8F34262B24E8898100149AB7 /* CountdownApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8F34263C24E889A200149AB7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8F34264024E88A2700149AB7 /* CircularProgressView.swift */,
+				8F34264224E8970B00149AB7 /* ClockView.swift */,
+				8F34264B24E96F2400149AB7 /* CircleButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8F34263D24E889A900149AB7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8F34263E24E889C300149AB7 /* CountdownModel.swift */,
+				8F34264924E95E9800149AB7 /* SystemSounds.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8F34264624E8A72300149AB7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8F34264724E8A75200149AB7 /* Binding+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +200,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F34262E24E8898100149AB7 /* ContentView.swift in Sources */,
+				8F34264C24E96F2400149AB7 /* CircleButton.swift in Sources */,
+				8F34264324E8970B00149AB7 /* ClockView.swift in Sources */,
+				8F34264824E8A75200149AB7 /* Binding+Ext.swift in Sources */,
+				8F34263F24E889C300149AB7 /* CountdownModel.swift in Sources */,
+				8F34264524E8A37200149AB7 /* SettingsView.swift in Sources */,
+				8F34264124E88A2700149AB7 /* CircularProgressView.swift in Sources */,
+				8F34264A24E95E9800149AB7 /* SystemSounds.swift in Sources */,
 				8F34262C24E8898100149AB7 /* CountdownApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
