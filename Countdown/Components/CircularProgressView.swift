@@ -6,34 +6,47 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 struct CircularProgressView: View {
-
-    @AppStorage("SelectedSystemSound") private var sound: SystemSounds.ID = 1005
+    
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @EnvironmentObject private var model: CountdownModel
+    @Environment(CountdownModel.self) private var model
     
     var body: some View {
-        Circle()
-            .fill(Color.clear)
-            .frame(width: size, height: size)
-            .overlay(Circle().stroke(Color(.secondarySystemBackground), lineWidth: 15))
-            .overlay(overlayCircle)
-    }
-    
-    private var overlayCircle: some View {
-        Circle()
-            .fill(Color.clear)
-            .frame(width: size, height: size)
-            .overlay(
+        ZStack {
+            Circle()
+                .stroke(.white.opacity(0.5), lineWidth: 18)
+
+            Circle()
+                .stroke(Color(.separator).opacity(0.3), lineWidth: 1)
+
+            if model.progress > 0 {
                 Circle()
                     .trim(from: 0, to: model.progress)
-                    .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round, lineJoin:.round))
+                    .stroke(
+                        AngularGradient(
+                            colors: [
+                                Color(.systemOrange),
+                                Color(.systemPink),
+                                Color(.systemTeal)
+                            ],
+                            center: .center
+                        ),
+                        style: StrokeStyle(lineWidth: 18, lineCap: .round, lineJoin: .round)
+                    )
                     .rotationEffect(.degrees(-90))
-                    .foregroundColor(Color(model.completed(with: sound) ? .systemGreen : .systemOrange))
-                    .animation(.easeInOut(duration: 0.2))
-            )
+                    .animation(.smooth(duration: 0.35), value: model.progress)
+            }
+
+            if model.progress == 1 {
+                Circle()
+                    .stroke(Color(.systemGreen), lineWidth: 18)
+                    .transition(.opacity)
+            }
+        }
+        .frame(width: size, height: size)
+        .padding(28)
+        .glassEffect(.regular, in: Circle())
     }
     
     private var size: CGFloat {
@@ -41,9 +54,12 @@ struct CircularProgressView: View {
     }
 }
 
-struct CircularProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularProgressView()
-            .environmentObject(CountdownModel())
-    }
+#Preview {
+    let model = CountdownModel()
+    model.selectedMinutes = 10
+    model.updateDurationFromSelection()
+    model.elapsedSeconds = 240
+
+    return CircularProgressView()
+        .environment(model)
 }

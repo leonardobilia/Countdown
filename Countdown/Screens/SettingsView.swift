@@ -6,64 +6,67 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 struct SettingsView: View {
-    
     @AppStorage("SelectedSystemSound") private var sound: SystemSounds.ID = 1005
-    
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject private var model: CountdownModel
+    @Environment(\.dismiss) private var dismiss
+    @Environment(CountdownModel.self) private var model
 
-    @State private var hours = [Int](0...23)
-    @State private var minutes = [Int](0...59)
-    @State private var seconds = [Int](0...59)
+    private let hours = [Int](0...23)
+    private let minutes = [Int](0...59)
+    private let seconds = [Int](0...59)
 
     var body: some View {
-        NavigationView {
+        @Bindable var model = model
+
+        NavigationStack {
             Form {
-                Section(header: Text("Timer")) {
-                    Picker("Hours", selection: $model.selectedHours.onChange(model.updateTimer)) {
+                Section("Timer") {
+                    Picker("Hours", selection: $model.selectedHours) {
                         ForEach(hours, id: \.self) { hour in
                             Text("\(hour)")
                         }
                     }
-                    
-                    Picker("Minutes", selection: $model.selectedMinutes.onChange(model.updateTimer)) {
+
+                    Picker("Minutes", selection: $model.selectedMinutes) {
                         ForEach(minutes, id: \.self) { minute in
                             Text("\(minute)")
                         }
                     }
-                    
-                    Picker("Seconds", selection: $model.selectedSeconds.onChange(model.updateTimer)) {
+
+                    Picker("Seconds", selection: $model.selectedSeconds) {
                         ForEach(seconds, id: \.self) { second in
                             Text("\(second)")
                         }
                     }
                 }
-                
-                Section(header: Text("Sounds")) {
-                    Picker("Sounds", selection: $sound.onChange(model.previewAudio)) {
+
+                Section("Sound") {
+                    Picker("Alert", selection: $sound) {
                         ForEach(model.sounds, id: \.id) { audio in
                             Text(audio.title).tag(audio.id)
                         }
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: model.selectedHours) { _, _ in model.updateDurationFromSelection() }
+            .onChange(of: model.selectedMinutes) { _, _ in model.updateDurationFromSelection() }
+            .onChange(of: model.selectedSeconds) { _, _ in model.updateDurationFromSelection() }
+            .onChange(of: sound) { _, newValue in model.previewAudio(newValue) }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { presentationMode.wrappedValue.dismiss() }
+                    Button("Done") { dismiss() }
                 }
             }
         }
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-            .environmentObject(CountdownModel())
-    }
+#Preview {
+    SettingsView()
+        .environment(CountdownModel())
 }

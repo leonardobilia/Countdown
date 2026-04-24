@@ -2,15 +2,24 @@
 ![](Screenshots/logo.png)
 <br />
 
-The Countdown timer app allows you to start, pause, reset and set up optional alarm sounds as you wish. The app is written in SwiftUI 2 and it is perfect for everyday activities such as cooking meals, taking quizzes, giving speeches and playing sports.
+Countdown is a small SwiftUI timer app for everyday activities such as cooking meals, taking quizzes, giving speeches and playing sports. It supports start, pause, reset, duration selection, and optional system alert sounds.
 
-![](Screenshots/screen-1.png)
-![](Screenshots/screen-2.png)
-![](Screenshots/screen-3.png)
+The project has been modernized for iOS 26 with SwiftUI, Observation, NavigationStack, native sheet presentation, and Liquid Glass effects.
+
+<p>
+  <img src="Screenshots/screen-1.png" width="260" alt="Countdown timer ready state" />
+  <img src="Screenshots/screen-2.png" width="260" alt="Countdown settings sheet" />
+  <img src="Screenshots/screen-3.png" width="260" alt="Countdown timer running state" />
+</p>
 
 
 # Built With
 [SwiftUI](https://developer.apple.com/xcode/swiftui/)
+
+- iOS 26+
+- SwiftUI Observation
+- Liquid Glass
+- Swift concurrency
 
 
 # Contributing

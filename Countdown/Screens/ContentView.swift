@@ -8,58 +8,69 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @EnvironmentObject private var model: CountdownModel
+
+    @AppStorage("SelectedSystemSound") private var sound: SystemSounds.ID = 1005
+    @Environment(CountdownModel.self) private var model
     @State private var showSettings = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                ZStack {
-                    CircularProgressView()
-                    ClockView()
-                }
-            
-                HStack {
-                    Button(action: { model.resetTimer() }) {
-                        CircleButton(style: .reset)
+        NavigationStack {
+            ZStack {
+                TimerBackdrop()
+
+                VStack(spacing: 32) {
+                    ZStack {
+                        CircularProgressView()
+                        ClockView()
                     }
-                    Spacer()
-                    Button(action: { model.playPauseAction() }) {
-                        CircleButton(style: model.isRunning ? .pause : .start)
-                    }.disabled(model.disabledAction())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.top, 18)
+
+                    ControlBar(
+                        isRunning: model.isRunning,
+                        canStart: model.canStart,
+                        reset: resetTimer,
+                        toggle: toggleTimer
+                    )
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 20)
                 }
-                .padding()
-            }
-            .onReceive(model.timer) { time in
-                model.receiveTimerUpdate()
             }
             .navigationTitle("Countdown")
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showSettings.toggle()
-                        model.isRunning = false
-                    }) {
-                        Label("Settings", systemImage: "gearshape.fill")
-                            .labelStyle(IconOnlyLabelStyle())
-                    }
-                    .sheet(isPresented: $showSettings, onDismiss: {
-                        model.storedDuration = model.duration
-                    }) {
-                        SettingsView()
-                            .environmentObject(model)
+                    Button(action: showTimerSettings) {
+                        Label("Settings", systemImage: "slider.horizontal.3")
                     }
                 }
             }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .presentationDetents([.medium, .large])
+            }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+    }
+
+    private func resetTimer() {
+        model.resetTimer()
+    }
+
+    private func toggleTimer() {
+        model.toggleTimer(sound: sound)
+    }
+
+    private func showTimerSettings() {
+        model.pauseTimer()
+        showSettings = true
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(CountdownModel())
-    }
+#Preview {
+    let model = CountdownModel()
+    model.selectedMinutes = 5
+    model.updateDurationFromSelection()
+
+    return ContentView()
+        .environment(model)
 }

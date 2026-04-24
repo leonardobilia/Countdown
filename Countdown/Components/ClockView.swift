@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct ClockView: View {
-    
-    @EnvironmentObject private var model: CountdownModel
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(CountdownModel.self) private var model
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Text(model.timeFormatter)
                 .font(font)
-                .fontWeight(.black)
+                .monospacedDigit()
+                .foregroundStyle(.primary)
+
+            Text(model.isRunning ? "Running" : "Ready")
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(.secondary)
         }
+        .padding(.horizontal, 28)
+        .padding(.vertical, 18)
+        .glassEffect(.regular, in: .rect(cornerRadius: 24, style: .continuous))
     }
     
     private var font: Font {
@@ -25,9 +33,11 @@ struct ClockView: View {
     }
 }
 
-struct ClockView_Previews: PreviewProvider {
-    static var previews: some View {
-        ClockView()
-            .environmentObject(CountdownModel())
-    }
+#Preview {
+    let model = CountdownModel()
+    model.selectedMinutes = 5
+    model.updateDurationFromSelection()
+
+    return ClockView()
+        .environment(model)
 }
